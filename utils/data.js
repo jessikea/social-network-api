@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 const names = [
     "Eren",
     "Mikasa",
@@ -30,9 +32,9 @@ const names = [
     "Floche",
     "Grisha",
     "Carla",
-];
-
-const thoughts = [
+  ];
+  
+  const thoughts = [
     "I'm going to kill all the titans!",
     "Erwin is the best commander!",
     "Eren must be stopped!",
@@ -59,22 +61,36 @@ const thoughts = [
     "Eren loves you more than you love him",
     "Free my boy Eren, he did nothing wrong",
     "If I kill all the enemies, will I be free?",
-
-];
-
-const getRandomArrItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
-
-const getRandomName = () =>
-    `${getRandomArrItem(names)}` ;
-
-const getRandomThoughts = (int) => {
+  ];
+  
+  const getRandomArrItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
+  
+  const getRandomName = () => `${getRandomArrItem(names)}`;
+  
+  const getRandomThoughts = (int) => {
     const results = [];
     for (let i = 0; i < int; i++) {
-        results.push({
-            thoughtText: getRandomArrItem(thoughts),
-        });
+      results.push({
+        thoughtText: getRandomArrItem(thoughts),
+        author: getRandomName(),
+      });
     }
     return results;
-};
-
-module.exports = { getRandomName, getRandomThoughts };
+  };
+  
+  const users = [];
+  
+  for (let i = 0; i < 20; i++) {
+    const username = getRandomName();
+    const thoughts = getRandomThoughts(4);
+    const email = `${username}${Math.floor(Math.random() * 50 + 1)}@email.com`;
+    users.push({
+      username,
+      thoughts,
+      email,
+    });
+  }
+  
+  console.log(users);
+  module.exports = { getRandomName, getRandomThoughts };
+  
